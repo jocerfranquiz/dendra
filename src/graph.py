@@ -8,7 +8,7 @@ class Entity:
         self.name = name
         self.attrs = attrs if attrs is not None else {}
 
-class Table(Entity): ...
+# class Table(Entity): ...
 
 class Graph(Entity): ...
 
@@ -25,7 +25,7 @@ class Link(Entity): ...
 
 # Data storage
 
-tables = {}
+# tables = {}
 graphs = {}
 nodes = {}
 arrows = {}
@@ -33,8 +33,8 @@ links = {}
 
 
 # Create entities
-def table(name: Hashable, attrs: Dict | None = None) -> Table:
-    return Table(name, attrs)
+# def table(name: Hashable, attrs: Dict | None = None) -> Table:
+#     return Table(name, attrs)
 
 def graph(name: Hashable, attrs: Dict | None = None) -> Graph:
     return Graph(name, attrs)
@@ -55,9 +55,9 @@ def link(name: Hashable, attrs: Dict | None = None) -> Link:
 # C.R.U.D. functions.
 def new(fn: Callable, name: Hashable, attrs: Dict | None = None) -> None:
     entity = fn(name, attrs)
-    if isinstance(entity, Table):
-        tables[name] = entity.attrs
-    elif isinstance(entity, Graph):
+    # if isinstance(entity, Table):
+    #     tables[name] = entity.attrs
+    if isinstance(entity, Graph):
         graphs[name] = entity.attrs
     elif isinstance(entity, Node):
         nodes[name] = entity.attrs
@@ -68,9 +68,9 @@ def new(fn: Callable, name: Hashable, attrs: Dict | None = None) -> None:
 
 
 def assign(fn: Callable, name: Hashable, attrs: Dict | Hashable) -> None:
-    if fn ==table:
-        tables[name] = attrs
-    elif fn == graph:
+    # if fn ==table:
+    #     tables[name] = attrs
+    if fn == graph:
         graphs[name] = attrs
     elif fn == node:
         nodes[name] = attrs
@@ -81,9 +81,9 @@ def assign(fn: Callable, name: Hashable, attrs: Dict | Hashable) -> None:
 
 
 def read(fn: Callable, name: Hashable) -> Dict | None:
-    if fn == table:
-        return tables.get(name)
-    elif fn == graph:
+    # if fn == table:
+    #     return tables.get(name)
+    if fn == graph:
         return graphs.get(name)
     elif fn == node:
         return nodes.get(name)
@@ -94,9 +94,9 @@ def read(fn: Callable, name: Hashable) -> Dict | None:
 
 
 def delete(fn: Callable, name: Hashable) -> None:
-    if fn == table:
-        tables.pop(name, None)
-    elif fn == graph:
+    # if fn == table:
+    #     tables.pop(name, None)
+    if fn == graph:
         graphs.pop(name, None)
     elif fn == node:
         nodes.pop(name, None)
